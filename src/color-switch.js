@@ -18,8 +18,8 @@ refs.stopBtn.addEventListener('click', onStop);
 
 let IntervalId;
 function onStart() {
-  if (refs.startBtn.classList.contains('isActive')) return;
-  refs.startBtn.classList.add('isActive');
+  if (refs.startBtn.classList.contains('active')) return;
+  refs.startBtn.classList.add('active');
   IntervalId = setInterval(() => {
     let randomIndex = randomIntegerFromInterval(0, colors.length-1);
     refs.body.style.backgroundColor = colors[randomIndex];
@@ -29,7 +29,7 @@ function onStart() {
 
 function onStop() {
   clearInterval(IntervalId);
-  refs.startBtn.classList.remove('isActive');
+  refs.startBtn.classList.remove('active');
   // console.log('Interval cleared');
 }
 
