@@ -10,27 +10,26 @@ const colors = [
 const refs = {
   startBtn: document.querySelector('button[data-action="start"]'),
   stopBtn: document.querySelector('button[data-action="stop"]'),
-  body: document.querySelector('body'),
 }
 
 refs.startBtn.addEventListener('click', onStart);
-refs.stopBtn.addEventListener('click', onStop);
 
 let IntervalId;
 function onStart() {
-  if (refs.startBtn.classList.contains('active')) return;
-  refs.startBtn.classList.add('active');
-  IntervalId = setInterval(() => {
-    let randomIndex = randomIntegerFromInterval(0, colors.length-1);
-    refs.body.style.backgroundColor = colors[randomIndex];
-    // console.log(randomIndex);
-  }, 1000);
+    refs.startBtn.disabled = true;
+    refs.stopBtn.addEventListener('click', onStop);
+
+    IntervalId = setInterval(() => {
+        let randomIndex = randomIntegerFromInterval(0, colors.length-1);
+        document.body.style.backgroundColor = colors[randomIndex];
+    }, 1000);
 }
 
 function onStop() {
   clearInterval(IntervalId);
-  refs.startBtn.classList.remove('active');
-  // console.log('Interval cleared');
+    refs.startBtn.disabled = false;
+    refs.stopBtn.removeEventListener('click', onStop);
+
 }
 
 const randomIntegerFromInterval = (min, max) => {
