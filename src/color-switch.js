@@ -18,6 +18,7 @@ let IntervalId;
 function onStart() {
     refs.startBtn.disabled = true;
     refs.stopBtn.addEventListener('click', onStop);
+    refs.startBtn.removeEventListener('click', onStart);
 
     IntervalId = setInterval(() => {
         let randomIndex = randomIntegerFromInterval(0, colors.length-1);
@@ -27,8 +28,9 @@ function onStart() {
 
 function onStop() {
   clearInterval(IntervalId);
-    refs.startBtn.disabled = false;
-    refs.stopBtn.removeEventListener('click', onStop);
+  refs.startBtn.disabled = false;
+  refs.stopBtn.removeEventListener('click', onStop);
+  refs.startBtn.addEventListener('click', onStart);
 
 }
 
